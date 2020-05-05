@@ -27,6 +27,139 @@
             >
           </v-col>
         </v-row>
+        <v-row>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">Address</div>
+                <v-text-field
+                v-model="caseInfo.address"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+
+            <v-row>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">Plaintiff</div>
+                <v-text-field
+                v-model="caseInfo.plaintiff"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+
+            <v-row>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">Defendant</div>
+                <v-text-field
+                v-model="caseInfo.defendant"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">City</div>
+                <v-text-field
+                v-model="caseInfo.city"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">County</div>
+                <v-text-field
+                v-model="caseInfo.county"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">State</div>
+                <v-text-field
+                v-model="caseInfo.state"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+                <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">Zip</div>
+                <v-text-field
+                v-model="caseInfo.zipcode"
+                rounded
+                hide-details
+                solo
+                flat
+                dense
+                background-color="#F0F5F6"
+                rows="3"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="pt-0">
+                <div class="font-weight-medium secondary--text">Date Case Opened</div>
+                <v-menu
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                >
+                    <template v-slot:activator="{ on }">
+                    <v-text-field
+                        v-model="caseInfo.dateCaseOpened"
+                        prepend-inner-icon="mdi-calendar"
+                        readonly
+                        rounded
+                            hide-details
+                            solo
+                            flat
+                            dense
+                            background-color="#F0F5F6"
+                        v-on="on"
+                    ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="caseInfo.dateCaseOpened" @input="menu = false"></v-date-picker>
+                </v-menu>
+            </v-col>
+            </v-row>
       </v-container>
     </v-card-text>
     <v-card-actions>
@@ -60,10 +193,12 @@ export default {
         servicePlanId: '',
         tenantName: '',
         address: '',
+        city: '',
+        county: '',
         state: '',
         zipcode: '',
         dateCaseOpened: '',
-        attorneyId: '',
+        attorneyId: 191,
         plaintiff: '',
         defendant: '',
       },
@@ -92,7 +227,7 @@ export default {
       axios
         .post(`http://localhost:3333/newCase`, {
           caseInfo: this.caseInfo,
-          clientId: 11,
+          clientId: 2,
         })
         .then(
           response => {
