@@ -19,7 +19,7 @@
               dense
               background-color="#F0F5F6"
               v-model="caseInfo.servicePlanId"
-              :items="cases"
+              :items="servicePlans"
             >
               <v-icon medium slot="append" color="accent"
                 >mdi-chevron-down</v-icon
@@ -66,7 +66,20 @@ export default {
         attorneyId: '',
         plaintiff: '',
         defendant: '',
-      }
+      },
+      servicePlans: [{
+        text: 'Pay as You Go',
+        value: 11
+      },
+      {
+        text: 'Self File',
+        value: 1
+      },
+      {
+        text: 'Full Eviction',
+        value: 21
+      },
+      ]
     };
   },
   props: {
